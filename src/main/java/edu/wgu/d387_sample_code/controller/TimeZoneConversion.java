@@ -5,9 +5,8 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 @CrossOrigin(origins = "http://localhost:4200")
-public class TimeZoneConversion {
-
-    public static String getTime(){
+public class TimeZoneConversion implements Runnable{
+    public static String getTime() {
 
         // Create DateTimeObject
         ZonedDateTime time = ZonedDateTime.now();
@@ -19,6 +18,12 @@ public class TimeZoneConversion {
         ZonedDateTime utc = time.withZoneSameInstant(ZoneId.of("UTC"));
 
         // return time string output
-        return eT.format(theTimeFormat) + " EST, " + mT.format(theTimeFormat) + " MTN, " + utc.format(theTimeFormat) + " UTC";
+        String displayTime = eT.format(theTimeFormat) + " EST, " + mT.format(theTimeFormat) + " MTN, " + utc.format(theTimeFormat) + " UTC";
+        return displayTime;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(getTime());
     }
 }
