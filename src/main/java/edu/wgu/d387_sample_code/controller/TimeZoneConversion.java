@@ -18,7 +18,7 @@ public class TimeZoneConversion implements Runnable{
         ZonedDateTime utc = time.withZoneSameInstant(ZoneId.of("UTC"));
 
         // return time string output
-        String displayTime = eT.format(theTimeFormat) + " EST, " + mT.format(theTimeFormat) + " MTN, " + utc.format(theTimeFormat) + " UTC";
+        String displayTime = eT.format(theTimeFormat) + " Eastern Standard, " + mT.format(theTimeFormat) + " Mountain Time, " + utc.format(theTimeFormat) + " UTC";
         return displayTime;
     }
 
