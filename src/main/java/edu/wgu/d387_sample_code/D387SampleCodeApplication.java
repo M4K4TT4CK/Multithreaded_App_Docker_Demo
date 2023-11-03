@@ -19,8 +19,8 @@ public class D387SampleCodeApplication {
 			InputStream stream = new ClassPathResource("welcome_en_CA.properties").getInputStream();
 			properties.load(stream);
 			System.out.println(properties.getProperty("welcome"));
-		} catch (IOException e) {
-            throw new RuntimeException(e);
+		} catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
