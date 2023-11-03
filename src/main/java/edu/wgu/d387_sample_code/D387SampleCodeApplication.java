@@ -9,19 +9,34 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+
+import static java.util.concurrent.Executors.newFixedThreadPool;
 
 @SpringBootApplication
 public class D387SampleCodeApplication {
+	static ExecutorService messageExecutor=newFixedThreadPool(5);
 	public static void main(String[] args) {
 		SpringApplication.run(D387SampleCodeApplication.class, args);
 		Properties properties = new Properties();
-		try {
-			InputStream stream = new ClassPathResource("welcome_en_CA.properties").getInputStream();
-			properties.load(stream);
-			System.out.println(properties.getProperty("welcome"));
-		} catch (Exception e) {
-            e.printStackTrace();
-        }
+		messageExecutor.execute(()-> {
+			try {
+				InputStream stream = new ClassPathResource("welcome_en_CA.properties").getInputStream();
+				properties.load(stream);
+				System.out.println(properties.getProperty("welcome"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		messageExecutor.execute(()-> {
+			try {
+				InputStream stream = new ClassPathResource("welcome_fr_CA.properties").getInputStream();
+				properties.load(stream);
+				System.out.println(properties.getProperty("welcome"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
     }
 
 }
