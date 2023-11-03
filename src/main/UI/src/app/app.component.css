@@ -254,6 +254,8 @@ header #nav .navbar .brand {
   text-align: center;
   text-transform: uppercase;
   background: #DF4848;
+  align-content: center;
+  justify-content: center;
 }
 
 /* line 17, ../../../components/sass/modules/_nav.scss */
