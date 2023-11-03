@@ -14,8 +14,6 @@ public class TimeZoneConversionController {
     @GetMapping("/presentation")
     public ResponseEntity<String> presentationDisplay(){
 
-        // Call getTime() to get the formatted time string
-
         String displayTime = "Join us for an online presentation at the Landon Hotel at on 14 NOV 2023 at " + TimeZoneConversion.getTime() + ".";
         return new ResponseEntity<String>(displayTime, HttpStatus.OK);
     }
