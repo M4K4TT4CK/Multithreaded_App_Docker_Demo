@@ -14,6 +14,8 @@ import {map} from "rxjs/operators";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  welcomeMessageFrench$!: Observable<string>;
+  welcomeMessageEnglish$!: Observable<string> | undefined;
 
   constructor(private httpClient:HttpClient){}
 
@@ -29,6 +31,14 @@ export class AppComponent implements OnInit{
   currentCheckOutVal!:string;
 
     ngOnInit(){
+
+      this.welcomeMessageFrench$ = this.httpClient
+        .get<string>(`${this.baseURL}/welcome?lang=fr-CA`, { responseType: 'text' as 'json' });
+
+      this.welcomeMessageEnglish$ = this.httpClient
+        .get<string>(`${this.baseURL}/welcome?lang=en-CA`, { responseType: 'text' as 'json' });
+
+
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
         checkout: new FormControl(' ')
