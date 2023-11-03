@@ -42,8 +42,6 @@ export class AppComponent implements OnInit{
     });
 
     //     this.rooms=ROOMS;
-
-
     const roomsearchValueChanges$ = this.roomsearch.valueChanges;
 
     // subscribe to the stream
@@ -59,8 +57,7 @@ export class AppComponent implements OnInit{
       rooms => {
         console.log(Object.values(rooms)[0]);
         this.rooms=<Room[]>Object.values(rooms)[0];
-
-        this.rooms.forEach( room => { room.priceCAD = room.price; room.priceEUR = room.price})
+        this.rooms.forEach( room => { room.priceUS = room.price; room.priceCAD = room.price; room.priceEUR = room.price})
       }
     );
   }
@@ -107,7 +104,7 @@ export interface Room{
   id:string;
   roomNumber:string;
   price:string;
-  // C2 - Code to add the CAD/EUR "prices"
+  priceUS:string;
   priceCAD:string;
   priceEUR:string;
   links:string;
