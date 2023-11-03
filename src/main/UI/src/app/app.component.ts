@@ -17,6 +17,7 @@ export class AppComponent implements OnInit{
 
   welcomeMessageEnglish$!: Observable<string>;
   welcomeMessageFrench$!: Observable<string>;
+  welcomeMessages$: Observable<string>[] = [];
 
   constructor(private httpClient:HttpClient){}
 
@@ -32,9 +33,14 @@ export class AppComponent implements OnInit{
   currentCheckOutVal!:string;
 
   ngOnInit(){
+    const languages = ['en-CA', 'fr-CA'];
+    this.welcomeMessages$ = languages.map(lang =>
+      this.httpClient.get(`${this.baseURL}/welcome?lang=${lang}`, { responseType: 'text' })
+    );
 
-    this.welcomeMessageEnglish$ = this.httpClient.get(this.baseURL + '/welcome?lang=en-US', {responseType: 'text'} )
-    this.welcomeMessageFrench$ = this.httpClient.get(this.baseURL + '/welcome?lang=fr-CA', {responseType: 'text'} )
+
+    // this.welcomeMessageEnglish$ = this.httpClient.get(this.baseURL + '/welcome?lang=en-US', {responseType: 'text'} )
+    // this.welcomeMessageFrench$ = this.httpClient.get(this.baseURL + '/welcome?lang=fr-CA', {responseType: 'text'} )
 
     this.roomsearch= new FormGroup({
       checkin: new FormControl(' '),
@@ -85,8 +91,6 @@ export class AppComponent implements OnInit{
   }*/
 
   getAll(): Observable<any> {
-
-
     return this.httpClient.get(this.baseURL + '/room/reservation/v1?checkin='+ this.currentCheckInVal + '&checkout='+this.currentCheckOutVal, {responseType: 'json'});
   }
 
