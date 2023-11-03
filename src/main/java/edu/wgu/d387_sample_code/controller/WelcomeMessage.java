@@ -7,7 +7,7 @@ public class WelcomeMessage implements Runnable{
 
     Locale locale;
 
-    WelcomeMessage(Locale locale) {
+    public WelcomeMessage(Locale locale) {
         this.locale = locale;
     }
 

@@ -59,7 +59,7 @@ export class AppComponent implements OnInit{
       rooms => {
         console.log(Object.values(rooms)[0]);
         this.rooms=<Room[]>Object.values(rooms)[0];
-        // C2 - Code to add the CAD/EUR "prices"
+
         this.rooms.forEach( room => { room.priceCAD = room.price; room.priceEUR = room.price})
       }
     );
@@ -94,8 +94,6 @@ export class AppComponent implements OnInit{
   }
 
 }
-
-
 
 export interface Roomsearch{
   checkin:string;
